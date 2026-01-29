@@ -17,26 +17,40 @@ const Signup = () => {
     const authCookie = document.cookie
       .split("; ")
       .find((row) => row.startsWith("auth="));
-    setIsAuth(!authCookie);
+
+    if (authCookie) {
+      setIsAuth(true);
+      setFirstName(localStorage.getItem("firstName") || "");
+      setLastName(localStorage.getItem("lastName") || "");
+      setEmail(localStorage.getItem("email") || "");
+    } else {
+      setIsAuth(false);
+    }
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+
     localStorage.setItem("firstName", firstName);
     localStorage.setItem("lastName", lastName);
     localStorage.setItem("email", email);
 
     document.cookie = "auth=true; path=/";
+
     alert("Sign Up successfully!");
-    router.push("/profile");
+    setIsAuth(true);
   };
 
   const handleLogout = () => {
     document.cookie = "auth=; Max-Age=0; path=/";
     localStorage.clear();
+
     alert("Logged out successfully!");
     setIsAuth(false);
-    router.push("/signup");
+
+    setFirstName("");
+    setLastName("");
+    setEmail("");
   };
 
   return (
@@ -52,7 +66,7 @@ const Signup = () => {
           {isAuth ? (
             <div className="flex flex-col items-center mt-8 gap-4">
               <p className="text-lg sm:text-xl md:text-2xl font-semibold text-center">
-                Hello, {localStorage.getItem("firstName")}!
+                Hello, {firstName}!
               </p>
               <button
                 onClick={handleLogout}
@@ -64,45 +78,38 @@ const Signup = () => {
           ) : (
             <form
               onSubmit={handleLogin}
-              className="flex flex-col gap-4 p-6 rounded-lg bg-yellow-400 max-w-md w-full mt-8 
-          "
+              className="flex flex-col gap-4 p-6 rounded-lg bg-yellow-400 max-w-md w-full mt-8"
             >
-              <label className="font-semibold text-sm sm:text-base md:text-lg">
-                FIRST NAME
-              </label>
+              <label className="font-semibold">FIRST NAME</label>
               <input
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 type="text"
                 required
-                className="border border-black p-2 rounded w-full text-sm sm:text-base md:text-lg"
+                className="border border-black p-2 rounded"
               />
 
-              <label className="font-semibold text-sm sm:text-base md:text-lg">
-                LAST NAME
-              </label>
+              <label className="font-semibold">LAST NAME</label>
               <input
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 type="text"
                 required
-                className="border border-black p-2 rounded w-full text-sm sm:text-base md:text-lg"
+                className="border border-black p-2 rounded"
               />
 
-              <label className="font-semibold text-sm sm:text-base md:text-lg">
-                EMAIL
-              </label>
+              <label className="font-semibold">EMAIL</label>
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 required
-                className="border border-black p-2 rounded w-full text-sm sm:text-base md:text-lg"
+                className="border border-black p-2 rounded"
               />
 
               <button
                 type="submit"
-                className="mt-4 py-2 border-2 border-black font-bold w-full hover:bg-black hover:text-yellow-400 transition-colors"
+                className="mt-4 py-2 border-2 border-black font-bold hover:bg-black hover:text-yellow-400 transition-colors"
               >
                 SEND
               </button>
@@ -110,10 +117,7 @@ const Signup = () => {
           )}
 
           <div className="flex justify-center mt-8">
-            <a
-              href="#"
-              className="text-black text-lg sm:text-xl font-bold hover:underline"
-            >
+            <a href="#" className="text-black font-bold hover:underline">
               MANAGE CONSENT PREFERENCE
             </a>
           </div>

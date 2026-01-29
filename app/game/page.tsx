@@ -28,7 +28,6 @@ const Game = () => {
     const newGrid = Array.from({ length: 25 }, () => Math.random() > 0.5);
     setGrid(newGrid);
   };
-
   const hasWon = grid.every((cell) => cell === false);
 
   return (
@@ -41,7 +40,6 @@ const Game = () => {
         Turn all lights off to win!
       </p>
 
-      {/* Grid */}
       <div className="grid grid-cols-5 gap-2 md:gap-3">
         {grid.map((cell, index) => (
           <div

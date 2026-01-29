@@ -9,14 +9,12 @@ const Navbar = () => {
 
   return (
     <nav className="w-full bg-black sticky top-0 z-50">
-      {/* Logo / Title */}
       <div className="relative flex justify-center items-center pt-2 px-4">
-        <h1 className="text-center font-extrabold text-4xl sm:text-5xl md:text-6xl">
+        <h1 className="w-full text-left md:text-center font-extrabold text-3xl sm:text-5xl md:text-6xl">
           <span className="logo-outline text-yellow-400">FADERALIST</span>
           <span className="text-yellow-400 ml-2">PIG</span>
         </h1>
 
-        {/* Hamburger Button */}
         <button
           className="sm:hidden absolute right-4 text-yellow-400 focus:outline-none"
           onClick={toggleMenu}

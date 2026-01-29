@@ -9,16 +9,14 @@ const Header = () => {
 
   return (
     <nav className="w-full bg-yellow-400 sticky top-0 z-50 flex flex-col gap-4">
-      {/* Logo / Title */}
       <div className="relative flex justify-center items-center px-4 pt-4">
-        <h1 className="text-center font-extrabold text-4xl sm:text-5xl md:text-6xl">
+        <div className="w-full text-left md:text-center font-extrabold text-3xl sm:text-5xl md:text-6xl">
           <span className="logo-outline">FADERALIST</span>
           <span className="text-black ml-2">PIG</span>
-        </h1>
+        </div>
 
-        {/* Hamburger Button */}
         <button
-          className="sm:hidden absolute right-4 text-black focus:outline-none"
+          className="sm:hidden absolute right-4 text-black focus:outline-none ml-2"
           onClick={toggleMenu}
         >
           <svg
