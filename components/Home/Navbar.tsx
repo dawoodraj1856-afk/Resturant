@@ -30,17 +30,12 @@ const Navbar = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d={
-                isOpen
-                  ? "M6 18L18 6M6 6l12 12" // X icon when open
-                  : "M4 6h16M4 12h16M4 18h16" // Hamburger icon when closed
-              }
+              d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
             />
           </svg>
         </button>
       </div>
 
-      {/* Navigation Buttons */}
       <div
         className={`flex flex-col sm:flex-row flex-wrap justify-center gap-2 px-2 pb-2 mt-5 transition-all duration-300 ${
           isOpen ? "block" : "hidden sm:flex"
